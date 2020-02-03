@@ -1,4 +1,4 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_ERROR} from '../actions/index';
+import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_ERROR} from '../actions/userActions';
 
 const initialState = {
     users: [],
@@ -13,6 +13,7 @@ const userReducer = (state = initialState, action) =>{
             isLoading: true
         }
         case GET_USER_SUCCESS: return {
+            ...state,
             users: action.payload,
             isLoading: false
         }

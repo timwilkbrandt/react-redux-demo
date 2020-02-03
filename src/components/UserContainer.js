@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {getUsers} from '../redux/actions/userActions'
 
 const mapStateToProps =  state => {
@@ -15,9 +15,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 function UserContainer({userData, getUsers}) {
+ 
     useEffect(() => {
         getUsers()
-    })
+    }, [])
     return userData.isLoading ? (
         <div>Loading...</div>
     ) : userData.error ? (
@@ -25,7 +26,7 @@ function UserContainer({userData, getUsers}) {
     ) : (
         <div>
             {
-                userData && userData.users.map(user => <p>{user.name}</p>)
+                userData && userData.users.map(user => <p key={user.id}>{user.name}</p>)
             }
         </div>
     )
